@@ -1,0 +1,1 @@
+export const Kill_Event_API = "https://gameinfo.albiononline.com/api/gameinfo/kills?limit=50";

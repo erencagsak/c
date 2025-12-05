@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model KillEvent {
+  id                  String   @id @default(cuid())
+  eventId             BigInt
+  battleId            BigInt?
+  timestamp           DateTime
+  killArea            String?
+
+  groupMemberCount    Int
+
+  killerId            String
+  killerName          String
+  killerGuildId       String?
+  killerGuildName     String?
+  killerAllianceId    String?
+  killerAllianceName  String?
+  killerAllianceTag   String?
+  killerAvgIP         Int
+  killerDeathFame     BigInt?
+  killerKillFame      BigInt?
+  killerFameRatio     Float?
+  killerMostUsedWeaponPicture String?
+
+  killerEquipment     Json
+
+  victimId            String
+  victimName          String
+  victimGuildId       String?
+  victimGuildName     String?
+  victimAllianceId    String?
+  victimAllianceName  String?
+  victimAllianceTag   String?
+  victimAvgIP         Int
+  victimDeathFame     BigInt?
+  victimKillFame      BigInt?
+  victimFameRatio     Float?
+  victimMostUsedWeaponPicture String?
+
+  victimEquipment     Json
+
+  groupMembers Json?
+
+  createdAt DateTime @default(now())
+}
