@@ -13,6 +13,7 @@ model KillEvent {
   battleId            BigInt?
   timestamp           DateTime
   killArea            String?
+  region              String?
 
   groupMemberCount    Int
 
@@ -49,4 +50,14 @@ model KillEvent {
   groupMembers Json?
 
   createdAt DateTime @default(now())
+}
+
+model PlayerPoints {
+  id         Int      @id @default(autoincrement())
+  playerId   String   @unique
+  playerName String
+  totalScore Float    @default(0)
+  kills      Int      @default(0)
+  deaths     Int      @default(0)
+  lastUpdate DateTime @updatedAt
 }
