@@ -49,6 +49,8 @@ model KillEvent {
 
   groupMembers Json?
 
+  processed Boolean @default(false)
+
   createdAt DateTime @default(now())
 }
 
@@ -56,8 +58,53 @@ model PlayerPoints {
   id         Int      @id @default(autoincrement())
   playerId   String   @unique
   playerName String
+
   totalScore Float    @default(0)
   kills      Int      @default(0)
   deaths     Int      @default(0)
+  assists    Int      @default(0)
+
   lastUpdate DateTime @updatedAt
+}
+
+model PlayerStats {
+  id                Int      @id @default(autoincrement())
+  playerId          String   @unique
+  playerName        String
+
+  soloKills         Int      @default(0)
+  outnumberedKills  Int      @default(0)
+  soloDeaths        Int      @default(0)
+  outnumberedDeaths Int      @default(0)
+  assists           Int      @default(0)
+
+  kda               Float?
+
+  mostUsedWeapon    String?
+  totalFame         Int      @default(0)
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model PlayerWeaponStats {
+  id          Int      @id @default(autoincrement())
+  
+  playerId    String
+  playerName  String
+  weapon      String
+
+  kills       Int      @default(0)
+  deaths      Int      @default(0)
+
+  killFame    Int      @default(0)
+  deathFame   Int      @default(0)
+
+  averageIP   Float?
+  lastUsedAt  DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([playerId, weapon])
 }
